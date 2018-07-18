@@ -12,7 +12,8 @@
         android:id="@+id/text_headline"
         style="@style/Authentication.Headline.TextView"
         android:layout_centerHorizontal="true"
-        android:text="@string/title_sign_in_your_server" />
+        android:text="@string/title_sign_in_your_server"
+        android:visibility="invisible" />
 
     <EditText
         android:id="@+id/text_server_url"
@@ -25,22 +26,26 @@
         android:hint="@string/default_server"
         android:imeOptions="actionDone"
         android:inputType="text|textUri"
-        android:paddingEnd="0dp" />
+        android:paddingEnd="0dp"
+        android:visibility="invisible" />
 
     <FrameLayout
         android:id="@+id/protocol_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/style_edit_text_authentication"
-        android:layout_marginStart="@dimen/screen_edge_left_and_right_margins"
         android:layout_below="@id/text_headline"
-        android:layout_marginTop="32dp">
+        android:layout_marginStart="@dimen/screen_edge_left_and_right_margins"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/style_edit_text_authentication"
+        android:visibility="invisible">
+
         <Spinner
             android:id="@+id/text_server_protocol"
-            android:spinnerMode="dropdown"
             android:layout_width="120dp"
             android:layout_height="50dp"
-            android:backgroundTint="@color/actionMenuColor" />
+            android:backgroundTint="@color/actionMenuColor"
+            android:spinnerMode="dropdown"
+            android:visibility="invisible" />
     </FrameLayout>
 
     <com.wang.avi.AVLoadingIndicatorView
@@ -56,6 +61,7 @@
         android:id="@+id/button_connect"
         style="@style/Authentication.Button"
         android:layout_alignParentBottom="true"
-        android:text="@string/action_connect" />
+        android:text="@string/action_connect"
+        android:visibility="invisible" />
 
 </RelativeLayout>

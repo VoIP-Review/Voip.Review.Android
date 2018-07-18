@@ -55,6 +55,10 @@ class ServerFragment : Fragment(), ServerView {
         container?.inflate(R.layout.fragment_authentication_server)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        //perform connection with default server
+        performConnect()
+
         super.onViewCreated(view, savedInstanceState)
         relative_layout.viewTreeObserver.addOnGlobalLayoutListener(layoutListener)
         setupOnClickListener()
@@ -107,7 +111,10 @@ class ServerFragment : Fragment(), ServerView {
         relative_layout.viewTreeObserver.removeOnGlobalLayoutListener(layoutListener)
     }
 
-    override fun showInvalidServerUrlMessage() = showMessage(getString(R.string.msg_invalid_server_url))
+    override fun showInvalidServerUrlMessage()
+    {
+        showMessage(getString(R.string.msg_invalid_server_url))
+    }
 
     override fun showLoading() {
         ui {
