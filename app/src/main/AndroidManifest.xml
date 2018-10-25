@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="chat.rocket.android">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,21 +15,23 @@
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true">
+        android:supportsRtl="true"
+        tools:replace="android:name">
 
         <activity
             android:name=".authentication.ui.AuthenticationActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:theme="@style/AuthenticationTheme"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
-
             </intent-filter>
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -38,6 +41,7 @@
                 <!--<data
                     android:host="auth"
                     android:scheme="rocketchat" />
+
                 <data
                     android:host="go.rocket.chat"
                     android:path="/auth"
@@ -47,7 +51,7 @@
 
         <activity
             android:name=".server.ui.ChangeServerActivity"
-            android:theme="@style/AuthenticationTheme" />
+            android:theme="@style/AppTheme" />
 
         <activity
             android:name=".main.ui.MainActivity"
@@ -60,7 +64,7 @@
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
 
         <activity
-            android:name=".webview.cas.ui.CasWebViewActivity"
+            android:name=".webview.sso.ui.SsoWebViewActivity"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
 
@@ -84,11 +88,6 @@
             android:name=".settings.password.ui.PasswordActivity"
             android:theme="@style/AppTheme" />
 
-        <!-- TODO: Change to fragment-->
-        <activity
-            android:name=".settings.about.ui.AboutActivity"
-            android:theme="@style/AppTheme" />
-
         <receiver
             android:name=".push.DirectReplyReceiver"
             android:enabled="true"
@@ -97,23 +96,6 @@
                 <action android:name="chat.rocket.android.ACTION_REPLY" />
             </intent-filter>
         </receiver>
-
-        <service
-            android:name=".push.FirebaseTokenService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
-            </intent-filter>
-        </service>
-
-        <service
-            android:name=".push.FirebaseMessagingService"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
 
         <service
             android:name=".chatroom.service.MessageService"

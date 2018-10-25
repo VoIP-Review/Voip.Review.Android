@@ -1,22 +1,23 @@
 package chat.rocket.android.chatinformation.ui
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import chat.rocket.android.R
+import chat.rocket.android.analytics.AnalyticsManager
+import chat.rocket.android.analytics.event.ScreenViewEvent
 import chat.rocket.android.chatinformation.adapter.ReadReceiptAdapter
 import chat.rocket.android.chatinformation.presentation.MessageInfoPresenter
 import chat.rocket.android.chatinformation.presentation.MessageInfoView
 import chat.rocket.android.chatinformation.viewmodel.ReadReceiptViewModel
-import chat.rocket.android.helper.EndlessRecyclerViewScrollListener
 import chat.rocket.android.util.extensions.setVisible
 import chat.rocket.android.util.extensions.showToast
-import chat.rocket.core.model.ReadReceipt
+import chat.rocket.android.util.extensions.ui
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_message_info.*
 import javax.inject.Inject
@@ -29,15 +30,15 @@ fun newInstance(messageId: String): Fragment {
     }
 }
 
+internal const val TAG_MESSAGE_INFO_FRAGMENT = "MessageInfoFragment"
 private const val BUNDLE_MESSAGE_ID = "message_id"
 
 class MessageInfoFragment : Fragment(), MessageInfoView {
-
     @Inject
     lateinit var presenter: MessageInfoPresenter
-
+    @Inject
+    lateinit var analyticsManager: AnalyticsManager
     private lateinit var adapter: ReadReceiptAdapter
-    private lateinit var endlessRecyclerViewScrollListener: EndlessRecyclerViewScrollListener
     private lateinit var messageId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,26 +66,18 @@ class MessageInfoFragment : Fragment(), MessageInfoView {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         presenter.loadReadReceipts(messageId = messageId)
-    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        receipt_list.removeOnScrollListener(endlessRecyclerViewScrollListener)
+        analyticsManager.logScreenView(ScreenViewEvent.MessageInfo)
     }
 
     private fun setupRecyclerView() {
         // Initialize the endlessRecyclerViewScrollListener so we don't NPE at onDestroyView
-        val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, true)
+        val linearLayoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, true)
         adapter = ReadReceiptAdapter()
         linearLayoutManager.stackFromEnd = true
         receipt_list.layoutManager = linearLayoutManager
         receipt_list.itemAnimator = DefaultItemAnimator()
         receipt_list.adapter = adapter
-        endlessRecyclerViewScrollListener = object :
-            EndlessRecyclerViewScrollListener(receipt_list.layoutManager as LinearLayoutManager) {
-            override fun onLoadMore(page: Int, totalItemsCount: Int, recyclerView: RecyclerView?) {
-            }
-        }
     }
 
     override fun showGenericErrorMessage() {
@@ -92,20 +85,22 @@ class MessageInfoFragment : Fragment(), MessageInfoView {
     }
 
     override fun showLoading() {
-        view_loading.setVisible(true)
-        view_loading.show()
+        ui {
+            view_loading.setVisible(true)
+            view_loading.show()
+        }
     }
 
     override fun hideLoading() {
-        view_loading.hide()
-        view_loading.setVisible(false)
+        ui {
+            view_loading.hide()
+            view_loading.setVisible(false)
+        }
     }
 
     override fun showReadReceipts(messageReceipts: List<ReadReceiptViewModel>) {
-        adapter.addAll(messageReceipts)
-    }
-
-    companion object {
-        const val TAG_MESSAGE_INFO_FRAGMENT = "MessageInfoFragment"
+        ui {
+            adapter.addAll(messageReceipts)
+        }
     }
 }

@@ -3,10 +3,8 @@ package chat.rocket.android.authentication.resetpassword.presentation
 import chat.rocket.android.authentication.presentation.AuthenticationNavigator
 import chat.rocket.android.core.lifecycle.CancelStrategy
 import chat.rocket.android.server.domain.GetConnectingServerInteractor
-import chat.rocket.android.server.domain.GetCurrentServerInteractor
 import chat.rocket.android.server.infraestructure.RocketChatClientFactory
-import chat.rocket.android.util.extensions.isEmail
-import chat.rocket.android.util.extensions.launchUI
+import chat.rocket.android.util.extension.launchUI
 import chat.rocket.android.util.retryIO
 import chat.rocket.common.RocketChatException
 import chat.rocket.common.RocketChatInvalidResponseException
@@ -26,30 +24,26 @@ class ResetPasswordPresenter @Inject constructor(
     private val client: RocketChatClient = factory.create(currentServer)
 
     fun resetPassword(email: String) {
-        when {
-            email.isBlank() -> view.alertBlankEmail()
-            !email.isEmail() -> view.alertInvalidEmail()
-            else -> launchUI(strategy) {
-                view.showLoading()
-                try {
-                    retryIO("forgotPassword(email = $email)") {
-                        client.forgotPassword(email)
-                    }
-                    navigator.toPreviousView()
-                    view.emailSent()
-                } catch (exception: RocketChatException) {
-                    if (exception is RocketChatInvalidResponseException) {
-                        view.updateYourServerVersion()
-                    } else {
-                        exception.message?.let {
-                            view.showMessage(it)
-                        }.ifNull {
-                            view.showGenericErrorMessage()
-                        }
-                    }
-                } finally {
-                    view.hideLoading()
+        launchUI(strategy) {
+            view.showLoading()
+            try {
+                retryIO("forgotPassword(email = $email)") {
+                    client.forgotPassword(email)
                 }
+                navigator.toPreviousView()
+                view.emailSent()
+            } catch (exception: RocketChatException) {
+                if (exception is RocketChatInvalidResponseException) {
+                    view.updateYourServerVersion()
+                } else {
+                    exception.message?.let {
+                        view.showMessage(it)
+                    }.ifNull {
+                        view.showGenericErrorMessage()
+                    }
+                }
+            } finally {
+                view.hideLoading()
             }
         }
     }

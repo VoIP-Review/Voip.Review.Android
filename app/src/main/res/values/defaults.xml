@@ -2,4 +2,7 @@
 <resources>
     <string name="default_protocol" translatable="false">https://</string>
     <string name="default_server" translatable="false">sb-c.voip.review</string>
+    <string name="server_hint_url" translatable="false">sb-c.voip.review</string>
+    <string name="community_server_url" translatable="false">sb-c.voip.review</string>
+    <string name="create_server_url" translatable="false">sb-c.voip.review</string>
 </resources>

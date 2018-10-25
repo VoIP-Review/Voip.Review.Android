@@ -1,9 +1,12 @@
+def taskRequests = getGradle().getStartParameter().getTaskRequests().toString()
+def isPlay = !(taskRequests.contains("Foss") || taskRequests.contains("foss"))
+
 apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
+if (isPlay) { apply plugin: 'io.fabric' }
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'realm-android'
+apply plugin: "com.github.ben-manes.versions"
 
 android {
     compileSdkVersion versions.compileSdk
@@ -11,12 +14,22 @@ android {
 
     defaultConfig {
         applicationId "chat.rocket.android"
-        minSdkVersion 21
+        minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
-        versionCode 2027
-        versionName "2.4.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        versionCode 2048
+        versionName "3.0.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+
+        def gitSha = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
+        def buildTime = new GregorianCalendar().format("MM-dd-yyyy' 'h:mm:ss a z")
+        buildConfigField "String", "GIT_SHA", "\"${gitSha}\""
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
 
     signingConfigs {
@@ -52,6 +65,20 @@ android {
         }
     }
 
+    flavorDimensions "type"
+
+    productFlavors {
+        // includes proprietary libs
+        play {
+            dimension "type"
+        }
+
+        // only foss
+        foss {
+            dimension "type"
+        }
+    }
+
     packagingOptions {
         exclude 'META-INF/core.kotlin_module'
         exclude 'META-INF/main.kotlin_module'
@@ -62,6 +89,11 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     implementation project(':player')
+    implementation project(':emoji')
+    implementation project(':draw')
+    implementation project(':util')
+    implementation project(':core')
+    implementation project(':suggestions')
 
     implementation libraries.kotlin
     implementation libraries.coroutines
@@ -69,27 +101,27 @@ dependencies {
 
     implementation libraries.appCompat
     implementation libraries.recyclerview
-    implementation libraries.design
-    implementation libraries.constraintLayout
-    implementation libraries.cardView
-    implementation libraries.flexbox
-    implementation libraries.customTabs
+    implementation libraries.constraintlayout
+    implementation libraries.cardview
+    implementation libraries.browser
 
     implementation libraries.androidKtx
+    implementation libraries.fragmentsKtx
 
     implementation libraries.dagger
     implementation libraries.daggerSupport
     kapt libraries.daggerProcessor
     kapt libraries.daggerAndroidApt
 
-    implementation libraries.fcm
-    implementation libraries.playServicesAuth
+    implementation libraries.flexbox
+    implementation libraries.material
 
     implementation libraries.room
     kapt libraries.roomProcessor
-    implementation libraries.roomRxjava
     implementation libraries.lifecycleExtensions
     kapt libraries.lifecycleCompiler
+    implementation libraries.viewmodelKtx
+    implementation libraries.workmanager
 
     implementation libraries.rxKotlin
     implementation libraries.rxAndroid
@@ -100,13 +132,14 @@ dependencies {
 
     implementation libraries.timber
     implementation libraries.threeTenABP
-    implementation libraries.rxBinding
 
     implementation libraries.fresco
     api libraries.frescoOkHttp
     implementation libraries.frescoAnimatedGif
     implementation libraries.frescoWebP
     implementation libraries.frescoAnimatedWebP
+
+    implementation libraries.glide
 
     kapt libraries.kotshiCompiler
     implementation libraries.kotshiApi
@@ -115,13 +148,18 @@ dependencies {
 
     implementation libraries.markwon
 
-    implementation libraries.sheetMenu
-
     implementation libraries.aVLoadingIndicatorView
 
-    implementation('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
-        transitive = true
-    }
+    implementation libraries.livedataKtx
+
+    implementation 'com.google.code.findbugs:jsr305:3.0.2'
+
+    // Proprietary libraries
+    playImplementation libraries.fcm
+    playImplementation libraries.firebaseAnalytics
+    playImplementation libraries.playServicesAuth
+    playImplementation('com.crashlytics.sdk.android:crashlytics:2.9.5@aar') { transitive = true }
+    playImplementation('com.crashlytics.sdk.android:answers:1.4.3@aar') { transitive = true }
 
     testImplementation libraries.junit
     testImplementation libraries.truth
@@ -141,13 +179,16 @@ androidExtensions {
 
 // FIXME - build and install the sdk into the app/libs directory
 // We were having some issues with the kapt generated files from the sdk when importing as a module
+
+def sdk_location=project.properties['sdk_location'] ?: ""
 task compileSdk(type:Exec) {
     if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
-        commandLine 'cmd', '/c', 'build-sdk.sh'
+        commandLine 'cmd', '/c', 'build-sdk.sh', sdk_location
     } else {
-        commandLine './build-sdk.sh'
+        commandLine './build-sdk.sh', sdk_location
     }
 }
 preBuild.dependsOn compileSdk
-
-apply plugin: 'com.google.gms.google-services'
+if (isPlay) {
+    apply plugin: 'com.google.gms.google-services'
+}
