@@ -153,12 +153,6 @@ class ServerFragment : Fragment(), ServerView {
         }
     }
 
-
-    override fun showInvalidServerUrlMessage()
-    {
-        showMessage(getString(R.string.msg_invalid_server_url))
-    }
-
     override fun disableButtonConnect() {
         context?.let {
             ViewCompat.setBackgroundTintList(
