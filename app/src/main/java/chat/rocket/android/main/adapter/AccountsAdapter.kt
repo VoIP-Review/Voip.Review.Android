@@ -24,7 +24,9 @@ class AccountsAdapter(
         }
     }
 
-    override fun getItemCount() = accounts.size + 2
+    // Replace 2 with 1 to hide `Add Account` item
+    override fun getItemCount() = accounts.size + 1
+    //    override fun getItemCount() = accounts.size + 2
 
     override fun getItemViewType(position: Int): Int {
         return when {
