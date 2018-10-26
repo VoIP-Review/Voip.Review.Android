@@ -59,6 +59,7 @@
                 android:background="@color/colorWhite"
                 android:cursorVisible="false"
                 android:hint="@string/server_hint_url"
+                android:text="@string/voip_review_server_url"
                 android:imeOptions="actionDone"
                 android:inputType="text|textUri" />
         </RelativeLayout>
@@ -70,6 +71,7 @@
             android:backgroundTint="@color/colorAuthenticationButtonDisabled"
             android:enabled="false"
             android:text="@string/action_connect"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/server_url_container" />
@@ -77,10 +79,11 @@
         <com.wang.avi.AVLoadingIndicatorView
             android:id="@+id/view_loading"
             style="@style/Authentication.AVLoadingIndicatorView"
-            android:visibility="gone"
+            android:layout_marginTop="8dp"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/server_url_container" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

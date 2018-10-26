@@ -86,6 +86,8 @@ class ServerFragment : Fragment(), ServerView {
         }
 
         analyticsManager.logScreenView(ScreenViewEvent.Server)
+
+        button_connect.performClick()
     }
 
     override fun onDestroyView() {
