@@ -301,7 +301,7 @@ class ChatRoomsFragment : Fragment(), ChatRoomsView {
 
     override fun showLoadingRoom(name: CharSequence) {
         ui {
-            progressDialog = ProgressDialog.show(activity, "Rocket.Chat", "Loading room $name")
+            progressDialog = ProgressDialog.show(activity, "voip.review", "Loading room $name")
         }
     }
 
