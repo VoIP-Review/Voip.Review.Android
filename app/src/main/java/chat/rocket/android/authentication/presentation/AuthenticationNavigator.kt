@@ -7,6 +7,7 @@ import chat.rocket.android.authentication.domain.model.LoginDeepLinkInfo
 import chat.rocket.android.authentication.ui.AuthenticationActivity
 import chat.rocket.android.main.ui.MainActivity
 import chat.rocket.android.server.ui.changeServerIntent
+import chat.rocket.android.util.extensions.addFragment
 import chat.rocket.android.util.extensions.addFragmentBackStack
 import chat.rocket.android.util.extensions.toPreviousView
 import chat.rocket.android.webview.ui.webViewIntent
@@ -44,9 +45,11 @@ class AuthenticationNavigator(internal val activity: AuthenticationActivity) {
         isNewAccountCreationEnabled: Boolean = true,
         deepLinkInfo: LoginDeepLinkInfo? = null
     ) {
-        activity.addFragmentBackStack(
+        // Replace `addFragmentToBackStack` with `addFragment` to prevent `go back`
+        activity.addFragment(
             ScreenViewEvent.LoginOptions.screenName,
-            R.id.fragment_container
+            R.id.fragment_container,
+            allowStateLoss = true
         ) {
             chat.rocket.android.authentication.loginoptions.ui.newInstance(
                 serverUrl,
