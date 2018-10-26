@@ -77,7 +77,7 @@ class AuthenticationActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 if (isAuthenticated) {
                     showChatList()
                 } else {
-                    showOnBoardingFragment()
+                    showServerFragment(LoginDeepLinkInfo("", null, null))
                 }
             }
         }
