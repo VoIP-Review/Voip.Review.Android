@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "311701313053-7hmo7402nqrsn1obtmmrkddgpp3nod7u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "voip.review.android",
+            "certificate_hash": "62f54c1647a4dc1e7d3a4b0a43c770b7f595be8d"
+          }
+        },
+        {
           "client_id": "311701313053-klf14vkoo4q6kp6ktk1kk2ot5fhfv1dp.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "311701313053-klf14vkoo4q6kp6ktk1kk2ot5fhfv1dp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
