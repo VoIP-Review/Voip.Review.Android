@@ -14,8 +14,8 @@ import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import chat.rocket.android.BuildConfig
-import chat.rocket.android.R
+import voip.review.android.BuildConfig
+import voip.review.android.R
 import chat.rocket.android.analytics.AnalyticsManager
 import chat.rocket.android.analytics.event.ScreenViewEvent
 import chat.rocket.android.authentication.domain.model.LoginDeepLinkInfo
@@ -62,7 +62,8 @@ class ServerFragment : Fragment(), ServerView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AndroidSupportInjection.inject(this)
-        deepLinkInfo = arguments?.getParcelable(DEEP_LINK_INFO)
+        // Disable DeepLink feature
+        // deepLinkInfo = arguments?.getParcelable(DEEP_LINK_INFO)
     }
 
     override fun onCreateView(
@@ -89,6 +90,8 @@ class ServerFragment : Fragment(), ServerView {
         }
 
         analyticsManager.logScreenView(ScreenViewEvent.Server)
+
+        button_connect.performClick()
     }
 
     override fun onDestroyView() {

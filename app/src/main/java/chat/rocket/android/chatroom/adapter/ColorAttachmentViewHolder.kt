@@ -7,7 +7,7 @@ import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.core.widget.ImageViewCompat
-import chat.rocket.android.R
+import voip.review.android.R
 import chat.rocket.android.chatroom.uimodel.ColorAttachmentUiModel
 import chat.rocket.android.emoji.EmojiReactionListener
 import kotlinx.android.synthetic.main.item_color_attachment.view.*

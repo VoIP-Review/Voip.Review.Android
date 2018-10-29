@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import chat.rocket.android.R
+import voip.review.android.R
 import chat.rocket.android.chatroom.uimodel.ReactionUiModel
 import chat.rocket.android.dagger.DaggerLocalComponent
 import chat.rocket.android.emoji.Emoji
