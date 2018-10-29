@@ -42,7 +42,7 @@ class ChangeServerActivity : AppCompatActivity(), ChangeServerView {
     }
 
     override fun showProgress() {
-        progress = ProgressDialog.show(this, "Rocket.Chat", "Changing Server")
+        progress = ProgressDialog.show(this, "voip.review", "Changing Server")
     }
 
     override fun hideProgress() {

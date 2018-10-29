@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import androidx.core.view.isVisible
-import chat.rocket.android.R
+import voip.review.android.R
 import chat.rocket.android.chatroom.uimodel.MessageAttachmentUiModel
 import chat.rocket.android.emoji.EmojiReactionListener
 import kotlinx.android.synthetic.main.item_message_attachment.view.*

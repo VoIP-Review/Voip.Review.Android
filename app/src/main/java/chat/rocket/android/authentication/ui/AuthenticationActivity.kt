@@ -7,7 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import chat.rocket.android.R
+import voip.review.android.R
 import chat.rocket.android.analytics.event.ScreenViewEvent
 import chat.rocket.android.authentication.domain.model.LoginDeepLinkInfo
 import chat.rocket.android.authentication.domain.model.getLoginDeepLinkInfo
@@ -77,7 +77,7 @@ class AuthenticationActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 if (isAuthenticated) {
                     showChatList()
                 } else {
-                    showOnBoardingFragment()
+                    showServerFragment(LoginDeepLinkInfo("", null, null))
                 }
             }
         }

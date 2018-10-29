@@ -20,7 +20,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import chat.rocket.android.R
+import voip.review.android.R
 import chat.rocket.android.analytics.AnalyticsManager
 import chat.rocket.android.analytics.event.ScreenViewEvent
 import chat.rocket.android.chatrooms.adapter.RoomsAdapter
@@ -301,7 +301,7 @@ class ChatRoomsFragment : Fragment(), ChatRoomsView {
 
     override fun showLoadingRoom(name: CharSequence) {
         ui {
-            progressDialog = ProgressDialog.show(activity, "Rocket.Chat", "Loading room $name")
+            progressDialog = ProgressDialog.show(activity, "voip.review", "Loading room $name")
         }
     }
 

@@ -1,6 +1,6 @@
 package chat.rocket.android.server.presentation
 
-import chat.rocket.android.BuildConfig
+import voip.review.android.BuildConfig
 import chat.rocket.android.authentication.server.presentation.VersionCheckView
 import chat.rocket.android.core.lifecycle.CancelStrategy
 import chat.rocket.android.helper.OauthHelper
@@ -33,6 +33,7 @@ import chat.rocket.core.RocketChatClient
 import chat.rocket.core.internal.rest.serverInfo
 import chat.rocket.core.internal.rest.settingsOauth
 import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.experimental.delay
 import timber.log.Timber
 
 private const val SERVICE_NAME_FACEBOOK = "facebook"
@@ -84,6 +85,7 @@ abstract class CheckServerPresenter constructor(
     internal fun checkServerInfo(serverUrl: String): Job {
         return launchUI(strategy) {
             try {
+                delay(1000L)
                 currentServer = serverUrl
                 val serverInfo = retryIO(description = "serverInfo", times = 5) {
                     client.serverInfo()
