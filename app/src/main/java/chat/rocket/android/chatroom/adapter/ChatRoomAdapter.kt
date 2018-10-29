@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import chat.rocket.android.R
+import voip.review.android.R
 import chat.rocket.android.chatroom.uimodel.*
 import chat.rocket.android.util.extensions.inflate
 import chat.rocket.android.emoji.EmojiReactionListener

@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import chat.rocket.android.R
+import voip.review.android.R
 import chat.rocket.android.chatroom.adapter.PeopleSuggestionsAdapter.PeopleSuggestionViewHolder
 import chat.rocket.android.chatroom.uimodel.suggestion.PeopleSuggestionUiModel
 import chat.rocket.android.util.extensions.setVisible

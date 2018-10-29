@@ -20,7 +20,7 @@ import androidx.appcompat.view.menu.MenuBuilder
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import chat.rocket.android.R
+import voip.review.android.R
 
 fun FragmentActivity.setLightStatusBar(view: View) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
