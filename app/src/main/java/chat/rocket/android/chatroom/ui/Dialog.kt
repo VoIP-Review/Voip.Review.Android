@@ -76,10 +76,10 @@ fun ChatRoomFragment.showFileAttachmentDialog(uri: Uri) {
                 (citation ?: "") + description.text.toString()
             )
         }
-        alertDialog.dismiss()
+        alertDialog?.dismiss()
     }
-    cancelButton.setOnClickListener { alertDialog.dismiss() }
-    alertDialog.show()
+    cancelButton.setOnClickListener { alertDialog?.dismiss() }
+    alertDialog?.show()
 }
 
 fun ChatRoomFragment.showDrawAttachmentDialog(byteArray: ByteArray) {
@@ -93,11 +93,11 @@ fun ChatRoomFragment.showDrawAttachmentDialog(byteArray: ByteArray) {
             byteArray,
             (citation ?: "") + description.text.toString()
         )
-        alertDialog.dismiss()
+        alertDialog?.dismiss()
     }
 
-    cancelButton.setOnClickListener { alertDialog.dismiss() }
-    alertDialog.show()
+    cancelButton.setOnClickListener { alertDialog?.dismiss() }
+    alertDialog?.show()
 }
 fun ChatRoomFragment.showCameraImageAttachmentDialog(uri: Uri) {
     imagePreview.isVisible = false
@@ -132,9 +132,9 @@ fun ChatRoomFragment.showCameraImageAttachmentDialog(uri: Uri) {
                     bitmap,
                     (citation ?: "") + description.text.toString())
         }
-        alertDialog.dismiss()
+        alertDialog?.dismiss()
     }
 
-    cancelButton.setOnClickListener { alertDialog.dismiss() }
-    alertDialog.show()
+    cancelButton.setOnClickListener { alertDialog?.dismiss() }
+    alertDialog?.show()
 }

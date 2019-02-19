@@ -13,6 +13,7 @@ import chat.rocket.android.authentication.domain.model.LoginDeepLinkInfo
 import chat.rocket.android.authentication.domain.model.getLoginDeepLinkInfo
 import chat.rocket.android.authentication.presentation.AuthenticationPresenter
 import chat.rocket.android.util.extensions.addFragment
+import chat.rocket.android.util.extensions.addFragmentBackStack
 import chat.rocket.common.util.ifNull
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
@@ -75,9 +76,18 @@ class AuthenticationActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 if (isAuthenticated) {
                     showChatList()
                 } else {
-                    showOnBoardingFragment()
+                   // showOnBoardingFragment()
+                    showStartFragemnt()
                 }
             }
+        }
+    }
+
+    private fun showStartFragemnt(){
+        addFragment(ScreenViewEvent.Server.screenName,
+                R.id.fragment_container,
+                allowStateLoss = true) {
+            chat.rocket.android.authentication.server.ui.newInstance()
         }
     }
 

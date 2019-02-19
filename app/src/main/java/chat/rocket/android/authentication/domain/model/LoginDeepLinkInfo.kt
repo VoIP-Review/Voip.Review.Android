@@ -34,7 +34,7 @@ fun Intent.getLoginDeepLinkInfo(): LoginDeepLinkInfo? {
 private inline fun Uri.isAuthenticationDeepLink(): Boolean {
     if (host == "auth")
         return true
-    else if (host == "go.rocket.chat" && path == "/auth")
+    else if (host == "go.voip.review" && path == "/auth")
         return true
     return false
 }

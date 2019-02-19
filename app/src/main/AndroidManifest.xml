@@ -40,10 +40,10 @@
 
                 <data
                     android:host="auth"
-                    android:scheme="rocketchat" />
+                    android:scheme="voipreview" />
 
                 <data
-                    android:host="go.rocket.chat"
+                    android:host="go.voip.review"
                     android:path="/auth"
                     android:scheme="https" />
             </intent-filter>
