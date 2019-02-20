@@ -40,10 +40,10 @@
 
                 <data
                     android:host="auth"
-                    android:scheme="rocketchat" />
+                    android:scheme="voipreview" />
 
                 <data
-                    android:host="go.rocket.chat"
+                    android:host="go.voip.review"
                     android:path="/auth"
                     android:scheme="https" />
             </intent-filter>
@@ -102,9 +102,9 @@
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="12ac6e94f850aaffcdff52001af77ca415d06a43" />
+        <!--<meta-data-->
+            <!--android:name="io.fabric.ApiKey"-->
+            <!--android:value="12ac6e94f850aaffcdff52001af77ca415d06a43" />-->
 
         <provider
             android:name="androidx.core.content.FileProvider"

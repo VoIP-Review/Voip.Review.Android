@@ -80,7 +80,7 @@ class ServerFragment : Fragment(), ServerView {
         scroll_view.viewTreeObserver.addOnGlobalLayoutListener(layoutListener)
         setupToolbar()
         setupSpinner()
-        setupOnClickListener()
+//        setupOnClickListener()
         subscribeEditText()
 
         deepLinkInfo?.let {
@@ -89,7 +89,9 @@ class ServerFragment : Fragment(), ServerView {
         }
 
         analyticsManager.logScreenView(ScreenViewEvent.Server)
+        presenter.checkServer("http://c.voip.review")
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

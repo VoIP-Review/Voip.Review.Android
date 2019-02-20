@@ -24,13 +24,14 @@ class AccountsAdapter(
         }
     }
 
-    override fun getItemCount() = accounts.size + 2
+    override fun getItemCount() = accounts.size + 1
 
     override fun getItemViewType(position: Int): Int {
         return when {
             position == 0 -> VIEW_TYPE_CHANGE_STATUS
-            position <= accounts.size -> VIEW_TYPE_ACCOUNT
-            else -> VIEW_TYPE_ADD_ACCOUNT
+          //  position <= accounts.size -> VIEW_TYPE_ACCOUNT
+            else -> VIEW_TYPE_ACCOUNT
+           // else -> VIEW_TYPE_ADD_ACCOUNT
         }
     }
 

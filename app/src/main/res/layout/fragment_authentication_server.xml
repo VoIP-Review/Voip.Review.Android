@@ -12,11 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
         <ImageView
             android:id="@+id/image_server"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_server"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -27,6 +29,7 @@
             style="@style/Authentication.TextView.Headline"
             android:layout_marginTop="8dp"
             android:text="@string/title_sign_in_your_server"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image_server" />
@@ -37,6 +40,7 @@
             android:layout_height="48dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/rounded_border"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_sign_in_to_your_server">
@@ -53,14 +57,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="6dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginStart="6dp"
                 android:layout_toEndOf="@+id/spinner_server_protocol"
                 android:background="@color/colorWhite"
                 android:cursorVisible="false"
                 android:hint="@string/server_hint_url"
                 android:imeOptions="actionDone"
                 android:inputType="text|textUri" />
+
         </RelativeLayout>
 
         <android.widget.Button
@@ -70,6 +75,7 @@
             android:backgroundTint="@color/colorAuthenticationButtonDisabled"
             android:enabled="false"
             android:text="@string/action_connect"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/server_url_container" />
@@ -77,10 +83,22 @@
         <com.wang.avi.AVLoadingIndicatorView
             android:id="@+id/view_loading"
             style="@style/Authentication.AVLoadingIndicatorView"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignStart="@+id/text_server_url"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintLeft_toLeftOf="@id/view_loading"
+            app:layout_constraintRight_toRightOf="@id/view_loading"
+            app:layout_constraintTop_toBottomOf="@id/view_loading" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
